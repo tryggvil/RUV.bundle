@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>URL</key>
+	<dict>
+		<key>RUV</key>
+		<dict>
+			<key>TestURLs</key>
+			<array>
+				<string>http://s.greenqloud.com/episodes/Family%20Guy/Season%2011/11x09%20-%20Space%20Cadet.mp4</string>
+			</array>
+			<key>URLPatterns</key>
+			<array>
+				<string>http://ruv.is/.+</string>
+				<string>http://www.ruv.is/.+</string>
+				<string>http://dagskra.ruv.is/.+</string>
+				<string>http://212.30.206.129:1935/ruv/.+</string>
+				<string>http://178.19.48.173:1935/ruv/.+</string>
+			</array>
+		</dict>
+	</dict>
+</dict>
+</plist>

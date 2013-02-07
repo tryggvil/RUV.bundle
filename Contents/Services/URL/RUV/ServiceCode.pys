@@ -1,0 +1,88 @@
+# -*- coding: utf-8 -*-
+#JSON_PATH = 'http://vimcasts.org/episodes.json'
+
+####################################################################################################
+def MetadataObjectForURL(url):
+    sdate='2011-03-22 00:56:00'
+    date = Datetime.ParseDate(sdate)
+    if "ras1.ruv.is" in url:
+        title=u'Ras 1'
+        summary=u'Bein Utsending'
+        #thumb=R('ruv-beint.png')
+        thumb="http://upload.wikimedia.org/wikipedia/en/b/bf/Ruvlogo2011.png"
+        return TrackObject(
+            title = title,
+            summary = summary,
+            thumb = thumb,
+        )
+    elif "ras2.ruv.is" in url:
+        title=u'Ras 2'
+        summary=u'Bein Utsending'
+        #thumb=R('ruv-beint.png')
+        thumb="http://upload.wikimedia.org/wikipedia/en/b/bf/Ruvlogo2011.png"
+        return TrackObject(
+            title = title,
+            summary = summary,
+            thumb = thumb,
+        )
+    else:
+        title=u'RUV'
+        summary=u'Bein Utsending'
+        #thumb=R('ruv-beint.png')
+        thumb="http://upload.wikimedia.org/wikipedia/en/b/bf/Ruvlogo2011.png"
+        return VideoClipObject(
+            title = title,
+            summary = summary,
+            thumb = thumb,
+        )
+    #details = {'title':'test','abstract':'test','poster':'http://upload.wikimedia.org/wikipedia/en/thumb/a/aa/Family_Guy_Logo.svg/500px-Family_Guy_Logo.svg.png','published_at':'2011-03-22 00:56:00'}
+    # Extract the details available directly form the page.
+    #title = details['title']
+    #description = details['abstract']
+    #thumb = details['poster']
+    #date = details['published_at']
+    #date = Datetime.ParseDate(date)
+    #return VideoClipObject(
+    #    title = title,
+    #    summary = description,
+    #    thumb = thumb,
+    #    originally_available_at = date
+    #)
+
+####################################################################################################
+def MediaObjectsForURL(url):
+    if url in "ras1.ruv.is":
+        return [
+          MediaObject(
+            audio_codec = AudioCodec.MP3,
+            container = Container.MP3,
+            optimized_for_streaming = True,
+            parts = [PartObject(key=HTTPLiveStreamURL(Callback(PlayVideo, url = url)))]
+          )
+        ]
+    elif url in "ras2.ruv.is":
+        return [
+          MediaObject(
+            audio_codec = AudioCodec.MP3,
+            container = Container.MP3,
+            optimized_for_streaming = True,
+            parts = [PartObject(key=HTTPLiveStreamURL(Callback(PlayVideo, url = url)))]
+          )
+        ]
+    else:
+        return [
+          MediaObject(
+            video_codec = VideoCodec.H264,
+            audio_codec = AudioCodec.AAC,
+            container = Container.MP4,
+            optimized_for_streaming = True,
+            parts = [PartObject(key=HTTPLiveStreamURL(Callback(PlayVideo, url = url)))]
+            #parts = [PartObject(key=Callback(PlayVideo, url = url))]
+          )
+        ]
+
+####################################################################################################
+def PlayVideo(url):
+    video_url=url
+    return Redirect(video_url)
+    #return IndirectResponse(VideoClipObject, key=url)
